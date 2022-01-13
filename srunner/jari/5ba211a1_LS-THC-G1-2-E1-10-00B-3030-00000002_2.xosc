@@ -1,0 +1,180 @@
+﻿<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<OpenSCENARIO>
+    <FileHeader revMajor="1" revMinor="0" date="2020-09-30T15:57:58.300" description="LS-THC-G1-2-E1-10-00B-3030" author=""/>
+    <CatalogLocations>
+        <VehicleCatalog>
+            <Directory path="Distros/Current/Config/Players/Vehicles"/>
+        </VehicleCatalog>
+        <ControllerCatalog>
+            <Directory path="Distros/Current/Config/Players/driverCfg.xml"/>
+        </ControllerCatalog>
+        <PedestrianCatalog>
+            <Directory path="Distros/Current/Config/Players/Pedestrians/PedDIGuyCfg.xml"/>
+        </PedestrianCatalog>
+        <MiscObjectCatalog>
+            <Directory path="Distros/Current/Config/Players/Objects"/>
+        </MiscObjectCatalog>
+        <EnvironmentCatalog>
+            <Directory path=""/>
+        </EnvironmentCatalog>
+        <ManeuverCatalog>
+            <Directory path=""/>
+        </ManeuverCatalog>
+        <TrajectoryCatalog>
+            <Directory path="Projects/Current/Scenarios/TrajectoryCatalogs"/>
+        </TrajectoryCatalog>
+        <RouteCatalog>
+            <Directory path=""/>
+        </RouteCatalog>
+    </CatalogLocations>
+    <RoadNetwork>
+        <LogicFile filepath="g1-2_straight.xodr"/>
+    </RoadNetwork>
+    <Entities>
+        <ScenarioObject name="Ego vehicle">
+          <Vehicle name="LEXUS_LS500h" vehicleCategory="car">
+          <ParameterDeclarations/>
+          <BoundingBox>
+              <Center x="0.0" y="0.0" z="0.0"/>
+              <Dimensions width="1.900" length="5.300" height="1.460"/>
+          </BoundingBox>
+          
+          <Performance maxSpeed="0.0" maxDeceleration="0.0" maxAcceleration="0.0"/>
+          <Axles>
+              <FrontAxle maxSteering="0.0" wheelDiameter="0.0" trackWidth="0.0" positionX="0.0" positionZ="0.0"/>
+              <RearAxle maxSteering="0.0" wheelDiameter="0.0" trackWidth="0.0" positionX="0.0" positionZ="0.0"/>
+          </Axles>
+          <Properties/>
+      </Vehicle>
+        </ScenarioObject>
+        <ScenarioObject name="target">
+          <Vehicle name="LEXUS_LS500h" vehicleCategory="car" >
+          <ParameterDeclarations/>
+          <BoundingBox>
+              <Center x="0.0" y="0.0" z="0.0"/>
+              <Dimensions width="1.900" length="5.300" height="1.460"/>
+          </BoundingBox>
+           
+          <Performance maxSpeed="0.0" maxDeceleration="0.0" maxAcceleration="0.0"/>
+          <Axles>
+              <FrontAxle maxSteering="0.0" wheelDiameter="0.0" trackWidth="0.0" positionX="0.0" positionZ="0.0"/>
+              <RearAxle maxSteering="0.0" wheelDiameter="0.0" trackWidth="0.0" positionX="0.0" positionZ="0.0"/>
+          </Axles>
+          <Properties/>
+      </Vehicle>
+        </ScenarioObject>
+        
+        
+    </Entities>
+    <Storyboard>
+        <Init>
+            <Actions>
+                
+                <Private entityRef="Ego vehicle">
+                    <PrivateAction>
+                        <TeleportAction>
+                            <Position>
+                                <LanePosition roadId="1" laneId="-2" offset="0.0" s="0"/>
+                            </Position>
+                        </TeleportAction>
+                    </PrivateAction>
+                    <PrivateAction>
+                        <LongitudinalAction>
+                            <SpeedAction>
+                                <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="step" value="0.0"/>
+                                <SpeedActionTarget>
+                                    <AbsoluteTargetSpeed value="16.666666666666668"/>
+                                </SpeedActionTarget>
+                            </SpeedAction>
+                        </LongitudinalAction>
+                    </PrivateAction>
+                    <PrivateAction>
+                        
+                            <ActivateControllerAction lateral="true" longitudinal="true"/>
+                        
+                    </PrivateAction>
+                </Private>
+                <Private entityRef="target">
+                    <PrivateAction>
+                        <TeleportAction>
+                            <Position>
+                                <LanePosition roadId="1" laneId="-3" offset="0.0" s="5.574159999999999"/>
+                            </Position>
+                        </TeleportAction>
+                    </PrivateAction>
+                    <PrivateAction>
+                        <LongitudinalAction>
+                            <SpeedAction>
+                                <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="step" value="0.0"/>
+                                <SpeedActionTarget>
+                                    <AbsoluteTargetSpeed value="5.555555555555555"/>
+                                </SpeedActionTarget>
+                            </SpeedAction>
+                        </LongitudinalAction>
+                    </PrivateAction>
+                </Private>
+                
+                
+            </Actions>
+        </Init>
+        <Story name="Story">
+            <Act name="Act">
+                <ManeuverGroup name="target ManeuverGroup" maximumExecutionCount="1">
+                    <Actors selectTriggeringEntities="false">
+                        <EntityRef entityRef="target"/>
+                    </Actors>
+                    <Maneuver name="target Maneuver">
+                        <Event name="target Scene 1 Event" priority="overwrite">
+                            <Action name="target Scene1 Lane Change Action">
+                                <PrivateAction>
+                                    <LateralAction>
+                                        <LaneChangeAction>
+                                            <LaneChangeActionDynamics dynamicsDimension="distance" dynamicsShape="linear" value="20"/>
+                                            <LaneChangeTarget>
+                                                <RelativeTargetLane entityRef="target" value="1"/>
+                                            </LaneChangeTarget>
+                                        </LaneChangeAction>
+                                    </LateralAction>
+                                </PrivateAction>
+                            </Action>
+                            <StartTrigger>
+                                <ConditionGroup>
+                                    <Condition name="target Scene1 Start Condition" delay="0" conditionEdge="none">
+                                        <ByValueCondition>
+                                            <SimulationTimeCondition value="0.0" rule="greaterThan"/>
+                                        </ByValueCondition>
+                                    </Condition>
+                                </ConditionGroup>
+                            </StartTrigger>
+                        </Event>
+                    </Maneuver>
+                </ManeuverGroup>
+                <StartTrigger>
+                    <ConditionGroup>
+                        <Condition name="Story Start Condition" delay="0.0" conditionEdge="rising">
+                            <ByValueCondition>
+                                <SimulationTimeCondition value="0.0" rule="greaterThan"/>
+                            </ByValueCondition>
+                        </Condition>
+                    </ConditionGroup>
+                </StartTrigger>
+            </Act>
+        </Story>
+        <StopTrigger>
+            <ConditionGroup>
+                <Condition name="Story End Condition" delay="0.0" conditionEdge="rising">
+                    <ByEntityCondition>
+                        <TriggeringEntities triggeringEntitiesRule="any">
+                            <EntityRef entityRef="Ego vehicle"/>
+                        </TriggeringEntities>
+                        <EntityCondition>
+                            <CollisionCondition>
+                                <EntityRef entityRef="target"/>
+                            </CollisionCondition>
+                        </EntityCondition>
+                    </ByEntityCondition>
+                </Condition>
+            </ConditionGroup>
+        </StopTrigger>
+    </Storyboard>
+</OpenSCENARIO>
