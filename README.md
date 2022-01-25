@@ -2,7 +2,7 @@
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/carla-simulator/scenario_runner.svg)
 [![Build Status](https://travis-ci.com/carla-simulator/scenario_runner.svg?branch=master)](https://travis-ci.com/carla/scenario_runner)
 
-ScenarioRunner for CARLA - Custom modified to work with leader board CARLA 0.9.13 and OpenPlanner 
+ScenarioRunner for CARLA - Custom modified to work with leader board CARLA 0.9.13 and OpenPlanner - Can work with Python2.7 
 ========================
 This repository contains traffic scenario definition and an execution engine
 for CARLA. It also allows the execution of a simulation of the CARLA Challenge.
