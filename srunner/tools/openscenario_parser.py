@@ -93,24 +93,24 @@ class ParameterRef:
     Returns the converted value whenever it is used.
     """
 
-    def __init__(self, reference_text) -> None:
+    def __init__(self, reference_text):
         # TODO: (for OSC1.1) add methods(lexer and math_interpreter) to
         #  recognize and interpret math expression from reference_text
         self.reference_text = str(reference_text)
 
-    def is_literal(self) -> bool:
+    def is_literal(self):
         """
         Returns: True when text is a literal/number
         """
         return self._is_matching(pattern=r"(-)?\d+(\.\d*)?")
 
-    def is_parameter(self) -> bool:
+    def is_parameter(self):
         """
         Returns: True when text is a parameter
         """
         return self._is_matching(pattern=r"[$][A-Za-z_][\w]*")
 
-    def _is_matching(self, pattern) -> bool:
+    def _is_matching(self, pattern):
         """
         Returns: True when pattern is matching with text
         """
@@ -134,21 +134,21 @@ class ParameterRef:
             value = None
         return value
 
-    def __float__(self) -> float:
+    def __float__(self):
         value = self.get_interpreted_value()
         if value is not None:
             return float(value)
         else:
             raise Exception("could not convert '{}' to float".format(self.reference_text))
 
-    def __int__(self) -> int:
+    def __int__(self):
         value = self.get_interpreted_value()
         if value is not None:
             return int(float(value))
         else:
             raise Exception("could not convert '{}' to int".format(self.reference_text))
 
-    def __str__(self) -> str:
+    def __str__(self):
         value = self.get_interpreted_value()
         return str(value) if value is not None else self.reference_text
 
@@ -156,64 +156,64 @@ class ParameterRef:
         value = self.get_interpreted_value()
         return value if value is not None else self.reference_text
 
-    def __radd__(self, other) -> bool:
+    def __radd__(self, other):
         return other + self.__float__()
 
-    def __add__(self, other) -> bool:
+    def __add__(self, other):
         return other + self.__float__()
 
-    def __rsub__(self, other) -> bool:
+    def __rsub__(self, other):
         return other - self.__float__()
 
-    def __sub__(self, other) -> bool:
+    def __sub__(self, other):
         return self.__float__() - other
 
-    def __rmul__(self, other) -> bool:
+    def __rmul__(self, other):
         return other * self.__float__()
 
-    def __mul__(self, other) -> bool:
+    def __mul__(self, other):
         return other * self.__float__()
 
-    def __truediv__(self, other) -> bool:
+    def __truediv__(self, other):
         return self.__float__() / other
 
-    def __rtruediv__(self, other) -> bool:
+    def __rtruediv__(self, other):
         return other / self.__float__()
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other):
         return other == self.__float__()
 
-    def __ne__(self, other) -> bool:
+    def __ne__(self, other):
         return other != self.__float__()
 
-    def __ge__(self, other) -> bool:
+    def __ge__(self, other):
         return self.__float__() >= other
 
-    def __le__(self, other) -> bool:
+    def __le__(self, other):
         return self.__float__() <= other
 
-    def __gt__(self, other) -> bool:
+    def __gt__(self, other):
         return self.__float__() > other
 
-    def __lt__(self, other) -> bool:
+    def __lt__(self, other):
         return self.__float__() < other
 
-    def __GE__(self, other) -> bool:  # pylint: disable=invalid-name
+    def __GE__(self, other):  # pylint: disable=invalid-name
         return self.__float__() >= other
 
-    def __LE__(self, other) -> bool:  # pylint: disable=invalid-name
+    def __LE__(self, other):  # pylint: disable=invalid-name
         return self.__float__() <= other
 
-    def __GT__(self, other) -> bool:  # pylint: disable=invalid-name
+    def __GT__(self, other):  # pylint: disable=invalid-name
         return self.__float__() > other
 
-    def __LT__(self, other) -> bool:  # pylint: disable=invalid-name
+    def __LT__(self, other):  # pylint: disable=invalid-name
         return self.__float__() < other
 
-    def __iadd__(self, other) -> bool:
+    def __iadd__(self, other):
         return self.__float__() + other
 
-    def __isub__(self, other) -> bool:
+    def __isub__(self, other):
         return self.__float__() - other
 
     def __abs__(self):

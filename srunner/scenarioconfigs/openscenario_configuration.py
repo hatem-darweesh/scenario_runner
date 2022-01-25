@@ -13,7 +13,11 @@ import logging
 import os
 import xml.etree.ElementTree as ET
 
-import xmlschema
+#import xmlschema
+
+import lxml
+import lxml.etree
+import lxml
 
 import carla
 
@@ -65,9 +69,9 @@ class OpenScenarioConfiguration(ScenarioConfiguration):
 
         Note: This will throw if the config is not valid. But this is fine here.
         """
-        xsd_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../openscenario/OpenSCENARIO.xsd")
-        xsd = xmlschema.XMLSchema(xsd_file)
-        xsd.validate(self.xml_tree)
+        # xsd_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../openscenario/OpenSCENARIO.xsd")
+        # xsd = lxml.etree.XMLSchema(xsd_file)
+        # xsd.validate(self.xml_tree)
 
     def _validate_openscenario_catalog_configuration(self, catalog_xml_tree):
         """
@@ -75,9 +79,9 @@ class OpenScenarioConfiguration(ScenarioConfiguration):
 
         Note: This will throw if the catalog config is not valid. But this is fine here.
         """
-        xsd_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../openscenario/OpenSCENARIO.xsd")
-        xsd = xmlschema.XMLSchema(xsd_file)
-        xsd.validate(catalog_xml_tree)
+        # xsd_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../openscenario/OpenSCENARIO.xsd")
+        # xsd = lxml.etree.XMLSchema(xsd_file)
+        # xsd.validate(catalog_xml_tree)
 
     def _parse_openscenario_configuration(self):
         """
