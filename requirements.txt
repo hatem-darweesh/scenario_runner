@@ -10,3 +10,4 @@ numpy
 matplotlib
 six
 simple-watchdog-timer
+lxml
